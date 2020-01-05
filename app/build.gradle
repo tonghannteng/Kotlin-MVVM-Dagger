@@ -18,10 +18,13 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://api.simplifiedcoding.in/course-apis/\"")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", "\"https://api.simplifiedcoding.in/course-apis/recyclerview/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.simplifiedcoding.in/course-apis/\"")
         }
     }
 }

@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit
 
 object Networking {
 
-
     private const val NETWORK_CALL_TIMEOUT = 60
 
     fun create(baseUrl: String, cacheDir: File, cacheSize: Long): NetworkService {
