@@ -1,13 +1,14 @@
 package com.tengtonghann.android.kotlin_mvvm_dagger.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tengtonghann.android.kotlin_mvvm_dagger.MyApplication
 import com.tengtonghann.android.kotlin_mvvm_dagger.R
 import com.tengtonghann.android.kotlin_mvvm_dagger.di.component.DaggerActivityComponent
 import com.tengtonghann.android.kotlin_mvvm_dagger.di.module.ActivityModule
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -20,9 +21,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val tvData = findViewById<TextView>(R.id.text_main_activity)
-        viewModel.movies.observe(this, Observer {
-            tvData.text = it.toString()
+        viewModel.movies.observe(this, Observer { movies ->
+            rv_main_activity.also {
+                it.layoutManager = LinearLayoutManager(baseContext)
+                it.setHasFixedSize(true)
+                it.adapter = MovieAdapter(movies)
+            }
         })
         viewModel.getMovies()
     }
